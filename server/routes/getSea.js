@@ -11,7 +11,7 @@ const options = {
 	useUnifiedTopology: true,
 };
 
-const getFish = async (req, res) => {
+const getSea = async (req, res) => {
 	filename = req.params.id;
 
 	const client = new MongoClient(MONGO_URI, options);
@@ -21,7 +21,7 @@ const getFish = async (req, res) => {
 		console.log("connected");
 		const db = client.db("items");
 		const fish = await db
-			.collection("fish")
+			.collection("sea-critters")
 			.findOne({ "file-name": filename });
 
 		res.status(200).json({
@@ -41,4 +41,4 @@ const getFish = async (req, res) => {
 	}
 };
 
-module.exports = { getFish };
+module.exports = { getSea };

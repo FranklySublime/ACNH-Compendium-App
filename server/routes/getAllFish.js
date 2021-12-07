@@ -1,30 +1,42 @@
-// const request = require("request-promise");
+// mongodb access
 
-const { getFishTest } = require("./getFishTest");
+const { MongoClient } = require("mongodb");
 
-let fishArray = [];
-const getAllFish = async (req, res) => {
-	try {
-		for (let i = 1; i <= 80; i++) {
-			let fish = await getFishTest(i).then((data) => data);
-			// fishArray.push(getFishTest(i).then((data) => data));
+require("dotenv").config();
 
-			fishArray.push(fish["file-name"]);
-		}
-		res.status(200).json({
-			status: 200,
-			data: fishArray,
-			message: "we're in boys",
-		});
-	} catch (err) {
-		console.log("ERROR", err);
-	}
+const { MONGO_URI } = process.env;
+
+const options = {
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
 };
 
-// console.log("GET ALL FISH:",
-// getAllFish().then((data) => console.log(data));
-// );
+const getAllFish = async (req, res) => {
+	const client = new MongoClient(MONGO_URI, options);
 
-// getAllFish();
+	try {
+		await client.connect();
+		console.log("connected");
+
+		const db = client.db("items");
+		const fish = await db.collection("fish").find().toArray();
+		const fishList = fish.map((fish) => fish.name["name-USen"]);
+
+		res.status(200).json({
+			status: 200,
+			data: fish,
+			message: "success",
+		});
+	} catch (err) {
+		res.status(500).json({
+			status: 500,
+			message: err.message,
+		});
+		console.log(err.stack);
+	} finally {
+		client.close();
+		console.log("disconnected");
+	}
+};
 
 module.exports = { getAllFish };

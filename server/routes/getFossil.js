@@ -11,7 +11,7 @@ const options = {
 	useUnifiedTopology: true,
 };
 
-const getFish = async (req, res) => {
+const getFossil = async (req, res) => {
 	filename = req.params.id;
 
 	const client = new MongoClient(MONGO_URI, options);
@@ -20,13 +20,13 @@ const getFish = async (req, res) => {
 		await client.connect();
 		console.log("connected");
 		const db = client.db("items");
-		const fish = await db
-			.collection("fish")
+		const fossil = await db
+			.collection("fossils")
 			.findOne({ "file-name": filename });
 
 		res.status(200).json({
 			status: 200,
-			data: fish,
+			data: fossil,
 			message: "success",
 		});
 	} catch (err) {
@@ -41,4 +41,4 @@ const getFish = async (req, res) => {
 	}
 };
 
-module.exports = { getFish };
+module.exports = { getFossil };
