@@ -36,7 +36,9 @@ const Wiki = () => {
 				{itemList?.map((item) => {
 					return (
 						<Wrapper key={item._id}>
-							<Link to={`/wiki/${item["file-name"]}`}>
+							<Link
+								to={`/wiki/${fetchList}/${item["file-name"]}`}
+							>
 								<div>{item.name["name-USen"]}</div>
 								<img
 									src={item.icon_uri}

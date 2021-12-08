@@ -1,6 +1,6 @@
 // react import
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 // context import
 import { WikiProvider } from "./context/WikiContext";
@@ -21,17 +21,14 @@ function App() {
 				<GlobalStyles />
 				<Wrapper>
 					<H1> Hello world 🌍 </H1>
-					<Switch>
-						<Route exact path="/">
-							<Homepage />
-						</Route>
-						<Route exact path="/wiki/">
-							<Wiki />
-						</Route>
-						<Route path="/wiki/:id">
-							<CritterInfo />
-						</Route>
-					</Switch>
+					<Routes>
+						<Route path="/" element={<Homepage />} />
+						<Route path="/wiki" element={<Wiki />} />
+						<Route
+							path="/wiki/:category/:id"
+							element={<CritterInfo />}
+						/>
+					</Routes>
 				</Wrapper>
 			</WikiProvider>
 		</BrowserRouter>
