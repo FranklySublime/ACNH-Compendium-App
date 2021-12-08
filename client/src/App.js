@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { WikiProvider } from "./context/WikiContext";
 
 // components import
+import Header from "./components/Header";
 import Homepage from "./components/Homepage";
 import Wiki from "./components/Wiki";
 import CritterInfo from "./components/Wiki/CritterInfo";
@@ -20,6 +21,7 @@ function App() {
 			<WikiProvider>
 				<GlobalStyles />
 				<Wrapper>
+					<Header />
 					<H1> Hello world 🌍 </H1>
 					<Routes>
 						<Route path="/" element={<Homepage />} />
