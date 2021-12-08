@@ -24,6 +24,7 @@ const CritterInfo = () => {
 			})
 			.catch((err) => console.error(err));
 	}, []);
+
 	return (
 		detailedCritter && (
 			<Wrapper>
@@ -38,11 +39,15 @@ const CritterInfo = () => {
 				<h2>Availability</h2>
 				<div>
 					Nothern Hemisphere:{" "}
-					{detailedCritter.availability["month-northern"]}
+					{detailedCritter.availability.isAllYear
+						? "All Months"
+						: detailedCritter.availability["month-northern"]}
 				</div>
 				<div>
 					Southern Hemisphere:{" "}
-					{detailedCritter.availability["month-southern"]}
+					{detailedCritter.availability.isAllYear
+						? "All Months"
+						: detailedCritter.availability["month-southern"]}
 				</div>
 			</Wrapper>
 		)
