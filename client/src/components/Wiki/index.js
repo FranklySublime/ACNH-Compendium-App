@@ -1,14 +1,19 @@
 // importing react
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
+// importing context
+import { WikiContext } from "../../context/WikiContext";
 
 // importing styling stuff
 import styled from "styled-components";
 
 const Wiki = () => {
 	const [itemList, setItemList] = useState(null);
+	const { fetchList, setFetchList } = useContext(WikiContext);
 
 	useEffect(() => {
-		fetch(`/bugs`)
+		fetch(`/${fetchList}`)
 			.then((res) => res.json())
 			.then((data) => {
 				console.log("JSON", data);
@@ -16,20 +21,28 @@ const Wiki = () => {
 				console.log(itemList);
 			})
 			.catch((err) => console.error(err));
-	}, []);
+	}, [fetchList]);
+
+	console.log(fetchList);
 
 	return (
 		<>
 			<div>Welcome to the Critterpedia page!</div>
-			<button>Bugs</button>
-			<button>Fish</button>
-			<button>Sea Critters</button>
+			<button onClick={() => setFetchList("bugs")}>Bugs</button>
+			<button onClick={() => setFetchList("fish")}>Fish</button>
+			<button onClick={() => setFetchList("sea")}>Sea Critters</button>
+
 			<ItemList>
 				{itemList?.map((item) => {
 					return (
 						<Wrapper key={item._id}>
-							<div>{item.name["name-USen"]}</div>
-							<img src={item.icon_uri} alt={item["file-name"]} />
+							<Link to={`/wiki/${item["file-name"]}`}>
+								<div>{item.name["name-USen"]}</div>
+								<img
+									src={item.icon_uri}
+									alt={item["file-name"]}
+								/>
+							</Link>
 						</Wrapper>
 					);
 				})}
