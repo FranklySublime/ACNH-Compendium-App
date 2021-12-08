@@ -11,34 +11,7 @@ const options = {
 	useUnifiedTopology: true,
 };
 
-const getAllFish = async (req, res) => {
-	const client = new MongoClient(MONGO_URI, options);
-
-	try {
-		await client.connect();
-		console.log("connected");
-
-		const db = client.db("items");
-		const fish = await db.collection("fish").find().toArray();
-		const fishList = fish.map((fish) => fish.name["name-USen"]);
-
-		res.status(200).json({
-			status: 200,
-			data: fish,
-			message: "success",
-		});
-	} catch (err) {
-		res.status(500).json({
-			status: 500,
-			message: err.message,
-		});
-		console.log(err.stack);
-	} finally {
-		client.close();
-		console.log("disconnected");
-	}
-};
-
+// handler for getting specific fish data
 const getFish = async (req, res) => {
 	filename = req.params.id;
 
@@ -69,18 +42,21 @@ const getFish = async (req, res) => {
 	}
 };
 
-const getAllBugs = async (req, res) => {
+// handler for getting all fish data
+const getAllFish = async (req, res) => {
 	const client = new MongoClient(MONGO_URI, options);
 
 	try {
 		await client.connect();
 		console.log("connected");
+
 		const db = client.db("items");
-		const bugs = await db.collection("bugs").find().toArray();
+		const fish = await db.collection("fish").find().toArray();
+		const fishList = fish.map((fish) => fish.name["name-USen"]);
 
 		res.status(200).json({
 			status: 200,
-			data: bugs,
+			data: fish,
 			message: "success",
 		});
 	} catch (err) {
@@ -95,4 +71,4 @@ const getAllBugs = async (req, res) => {
 	}
 };
 
-module.exports = { getAllFish, getFish, getAllBugs };
+module.exports = { getFish, getAllFish };
