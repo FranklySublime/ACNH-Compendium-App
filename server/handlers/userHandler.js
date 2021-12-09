@@ -14,8 +14,6 @@ const options = {
 
 // handler for creating an account
 
-// DON'T FORGET TO DO VALIDATION DUDE
-
 const createAccount = async (req, res) => {
 	const client = new MongoClient(MONGO_URI, options);
 
@@ -44,6 +42,29 @@ const createAccount = async (req, res) => {
 			lastName,
 			collections: { bugs, fish, sea, fossils, art, music },
 		};
+
+		const user = await db.collection("accounts").findOne({
+			username: username,
+		});
+		const foundEmail = await db.collection("accounts").findOne({
+			email: email,
+		});
+
+		if (user) {
+			return res.status(409).json({
+				status: 409,
+				data: req.body,
+				message: "this username has already been taken",
+			});
+		}
+
+		if (foundEmail) {
+			return res.status(409).json({
+				status: 409,
+				data: req.body,
+				message: "this email is already registered with an account",
+			});
+		}
 
 		const account = await db.collection("accounts").insertOne(newValue);
 		res.status(200).json({
