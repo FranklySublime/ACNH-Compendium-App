@@ -86,17 +86,15 @@ const getAvailableFish = async (req, res) => {
 
 		const db = client.db("items");
 
-		const fish = await db.collection("fish").find().toArray();
+		const fish = await db
+			.collection("fish")
+			.find({
+				"availability.month-array-northern": month,
+				"availability.time-array": hour,
+			})
+			.toArray();
 
-		const timeArray = fish.filter((item) =>
-			item.availability["time-array"].includes(hour)
-		);
-
-		const monthArray = timeArray.filter((item) =>
-			item.availability["month-array-northern"].includes(month)
-		);
-
-		const fishList = monthArray.map((fish) => {
+		const fishList = fish.map((fish) => {
 			return {
 				name: fish.name["name-USen"],
 				filename: fish["file-name"],
