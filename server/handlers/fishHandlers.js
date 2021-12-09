@@ -43,6 +43,7 @@ const getFish = async (req, res) => {
 };
 
 // handler for getting all fish data
+
 const getAllFish = async (req, res) => {
 	const client = new MongoClient(MONGO_URI, options);
 
@@ -71,4 +72,52 @@ const getAllFish = async (req, res) => {
 	}
 };
 
-module.exports = { getFish, getAllFish };
+// handler for getting available fish data
+
+const getAvailableFish = async (req, res) => {
+	const client = new MongoClient(MONGO_URI, options);
+
+	const time = new Date();
+	const hour = time.getHours();
+	const month = time.getMonth() + 1;
+	try {
+		await client.connect();
+		console.log("connected");
+
+		const db = client.db("items");
+
+		const fish = await db.collection("fish").find().toArray();
+
+		const timeArray = fish.filter((item) =>
+			item.availability["time-array"].includes(hour)
+		);
+
+		const monthArray = timeArray.filter((item) =>
+			item.availability["month-array-northern"].includes(month)
+		);
+
+		const fishList = monthArray.map((fish) => {
+			return {
+				name: fish.name["name-USen"],
+				filename: fish["file-name"],
+				iconSrc: fish.icon_uri,
+			};
+		});
+
+		res.status(200).json({
+			status: 200,
+			data: fishList,
+			message: "all good chief",
+		});
+	} catch (err) {
+		res.status(500).json({
+			status: 500,
+			message: err.message,
+		});
+	} finally {
+		client.close();
+		console.log("disconnected");
+	}
+};
+
+module.exports = { getFish, getAllFish, getAvailableFish };

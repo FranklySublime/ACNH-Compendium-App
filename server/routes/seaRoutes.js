@@ -1,11 +1,16 @@
 const { Router } = require("express");
 
-const { getSea, getAllSea } = require("../handlers/seaHandlers");
+const {
+	getSea,
+	getAllSea,
+	getAvailableSea,
+} = require("../handlers/seaHandlers");
 
 const seaRouter = Router();
 
 // endpoints
-seaRouter.get("/:id", getSea);
 seaRouter.get("/", getAllSea);
+seaRouter.get("/available", getAvailableSea);
+seaRouter.get("/:id", getSea);
 
 module.exports = seaRouter;
