@@ -9,6 +9,7 @@ const seaRouter = require("./routes/seaRoutes");
 const artRouter = require("./routes/artRoutes");
 const fossilRouter = require("./routes/fossilRoutes");
 const musicRouter = require("./routes/musicRoutes");
+const userRouter = require("./routes/userRoutes");
 
 const PORT = 8000;
 
@@ -25,6 +26,7 @@ express()
 	.use("/art", artRouter)
 	.use("/fossil", fossilRouter)
 	.use("/music", musicRouter)
+	.use("/user", userRouter)
 
 	.listen(PORT, function () {
 		console.info("🌍 Listening on port " + PORT);

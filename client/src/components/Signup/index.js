@@ -1,9 +1,12 @@
 import React from "react";
 
 const Signup = () => {
+	handleSignup = (e) => {
+		e.preventDefault();
+	};
+
 	return (
 		<div>
-			hello
 			<form>
 				<input placeholder="Username" />
 				<input placeholder="email" />
