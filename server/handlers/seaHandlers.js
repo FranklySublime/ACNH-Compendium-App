@@ -105,7 +105,7 @@ const getAvailableSea = async (req, res) => {
 
 		res.status(200).json({
 			status: 200,
-			data: sea,
+			data: seaList,
 			message: "all good chief",
 		});
 	} catch (err) {
