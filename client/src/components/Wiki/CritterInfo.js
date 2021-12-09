@@ -9,14 +9,14 @@ import { WikiContext } from "../../context/WikiContext";
 import styled from "styled-components";
 
 const CritterInfo = () => {
-	const { fetchList } = useContext(WikiContext);
-	const { id } = useParams();
+	// const { fetchList } = useContext(WikiContext);
+	const { category, id } = useParams();
 	const [detailedCritter, setDetailedCritter] = useState(null);
 
-	console.log(fetchList);
+	// console.log(fetchList);
 
 	useEffect(() => {
-		fetch(`/${fetchList}/${id}`)
+		fetch(`/${category}/${id}`)
 			.then((res) => res.json())
 			.then((data) => {
 				console.log("JSON", data);
