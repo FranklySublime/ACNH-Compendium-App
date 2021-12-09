@@ -1,7 +1,7 @@
 import React from "react";
 
 const Signup = () => {
-	handleSignup = (e) => {
+	const handleSignup = (e) => {
 		e.preventDefault();
 	};
 
