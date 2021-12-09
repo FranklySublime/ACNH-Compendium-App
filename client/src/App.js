@@ -10,6 +10,8 @@ import Header from "./components/Header";
 import Homepage from "./components/Homepage";
 import Wiki from "./components/Wiki";
 import CritterInfo from "./components/Wiki/CritterInfo";
+import Signin from "./components/Signin";
+import Signup from "./components/Signup";
 
 //styling imports
 import GlobalStyles from "./GlobalStyles";
@@ -30,6 +32,8 @@ function App() {
 							path="/wiki/:category/:id"
 							element={<CritterInfo />}
 						/>
+						<Route path="/signin" element={<Signin />} />
+						<Route path="/signup" element={<Signup />} />
 					</Routes>
 				</Wrapper>
 			</WikiProvider>
