@@ -16,7 +16,10 @@ const AvailableFish = () => {
 			<div>
 				{availableFish.map((fish) => {
 					return (
-						<Link to={`/wiki/fish/${fish.filename}`}>
+						<Link
+							to={`/wiki/fish/${fish.filename}`}
+							key={fish.filename}
+						>
 							<img src={fish.iconSrc} alt={fish.name} />
 						</Link>
 					);

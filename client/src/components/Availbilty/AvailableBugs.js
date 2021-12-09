@@ -16,7 +16,10 @@ const AvailableBugs = () => {
 			<div>
 				{availableBugs.map((bug) => {
 					return (
-						<Link to={`/wiki/bugs/${bug.filename}`}>
+						<Link
+							to={`/wiki/bugs/${bug.filename}`}
+							key={bug.filename}
+						>
 							<img src={bug.iconSrc} alt={bug.name} />
 						</Link>
 					);

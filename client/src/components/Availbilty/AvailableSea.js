@@ -15,7 +15,10 @@ const AvailableSea = () => {
 			<div>
 				{availableSea.map((sea) => {
 					return (
-						<Link to={`/wiki/sea/${sea.filename}`}>
+						<Link
+							to={`/wiki/sea/${sea.filename}`}
+							key={sea.filename}
+						>
 							<img src={sea.iconSrc} alt={sea.name} />
 						</Link>
 					);
