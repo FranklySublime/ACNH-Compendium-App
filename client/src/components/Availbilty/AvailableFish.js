@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 
+import { Link } from "react-router-dom";
+
 const AvailableFish = () => {
 	const [availableFish, setAvailableFish] = useState(null);
 
@@ -13,7 +15,11 @@ const AvailableFish = () => {
 		availableFish && (
 			<div>
 				{availableFish.map((fish) => {
-					return <img src={fish.iconSrc} alt={fish.name} />;
+					return (
+						<Link to={`/wiki/fish/${fish.filename}`}>
+							<img src={fish.iconSrc} alt={fish.name} />
+						</Link>
+					);
 				})}
 			</div>
 		)

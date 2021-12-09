@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 
+import { Link } from "react-router-dom";
+
 const AvailableBugs = () => {
 	const [availableBugs, setAvailableBugs] = useState(null);
 
@@ -13,7 +15,11 @@ const AvailableBugs = () => {
 		availableBugs && (
 			<div>
 				{availableBugs.map((bug) => {
-					return <img src={bug.iconSrc} alt={bug.name} />;
+					return (
+						<Link to={`/wiki/bugs/${bug.filename}`}>
+							<img src={bug.iconSrc} alt={bug.name} />
+						</Link>
+					);
 				})}
 			</div>
 		)
