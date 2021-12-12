@@ -1,6 +1,6 @@
 // library access
 
-const { MongoClient } = require("mongodb");
+const { MongoClient, GridFSBucket, ObjectId } = require("mongodb");
 const bcrypt = require("bcryptjs");
 const { connect } = require("../routes/fishRoutes");
 require("dotenv").config();
@@ -118,7 +118,7 @@ const signin = async (req, res) => {
 		}
 		res.status(200).json({
 			status: 200,
-			data: username,
+			data: user._id,
 			message: "we're in chief",
 		});
 	} catch (err) {
@@ -134,4 +134,44 @@ const signin = async (req, res) => {
 	}
 };
 
-module.exports = { createAccount, signin };
+// handler for getting the current user after signin
+
+const getUser = async (req, res) => {
+	const client = new MongoClient(MONGO_URI, options);
+
+	const id = req.params.id;
+
+	try {
+		await client.connect();
+		console.log("connected");
+
+		const db = await client.db("users");
+		const user = await db
+			.collection("accounts")
+			.findOne({ _id: ObjectId(id) });
+		res.status(200).json({
+			status: 200,
+			_id: user._id,
+			username: user.username,
+			bugs: user.collections.bugs,
+			fish: user.collections.fish,
+			sea: user.collections.sea,
+			fossils: user.collections.fossils,
+			art: user.collections.art,
+			music: user.collections.music,
+			message: "༼ つ ◕_◕ ༽つ console.log(user_data) ༼ つ ◕_◕ ༽つ",
+		});
+	} catch (err) {
+		res.status(500).json({
+			status: 500,
+			data: {},
+			message: err.message,
+		});
+		console.log(err.message);
+	} finally {
+		client.close();
+		console.log("disconnected");
+	}
+};
+
+module.exports = { createAccount, signin, getUser };

@@ -24,6 +24,7 @@ const Signin = () => {
 			.then((res) => res.json())
 			.then((json) => {
 				console.log("JSON", json);
+				localStorage.setItem("_id", json.data);
 				navigate("../", { replace: true });
 			});
 	};

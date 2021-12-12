@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 
 // importing context
 import { WikiContext } from "../../context/WikiContext";
+import { UserContext } from "../../context/UserContext";
 
 // importing styling
 import styled from "styled-components";
@@ -12,6 +13,9 @@ const CritterInfo = () => {
 	// const { fetchList } = useContext(WikiContext);
 	const { category, id } = useParams();
 	const [detailedCritter, setDetailedCritter] = useState(null);
+	const {
+		actions: { addToCollection },
+	} = useContext(UserContext);
 
 	// console.log(fetchList);
 
@@ -49,6 +53,9 @@ const CritterInfo = () => {
 						? "All Months"
 						: detailedCritter.availability["month-southern"]}
 				</div>
+				<button onClick={() => addToCollection(category, id)}>
+					Add to Collection
+				</button>
 			</Wrapper>
 		)
 	);
