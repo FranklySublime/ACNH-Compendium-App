@@ -15,6 +15,22 @@ export const UserProvider = ({ children }) => {
 
 	const addToCollection = (collection, data) => {
 		console.log(data);
+		let _id = localStorage.getItem("_id");
+
+		fetch(`/user/collection/${collection}/${data}`, {
+			method: "PATCH",
+			body: JSON.stringify({
+				_id: _id,
+			}),
+			headers: {
+				Accept: "application/json",
+				"Content-type": "application/json",
+			},
+		})
+			.then((res) => res.json())
+			.then((json) => {
+				console.log("JSON", json);
+			});
 		dispatch({
 			type: "add-to-collection",
 			data,

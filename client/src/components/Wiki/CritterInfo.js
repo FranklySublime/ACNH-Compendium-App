@@ -14,6 +14,7 @@ const CritterInfo = () => {
 	const { category, id } = useParams();
 	const [detailedCritter, setDetailedCritter] = useState(null);
 	const {
+		state,
 		actions: { addToCollection },
 	} = useContext(UserContext);
 
