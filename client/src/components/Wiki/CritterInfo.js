@@ -15,7 +15,7 @@ const CritterInfo = () => {
 	const [detailedCritter, setDetailedCritter] = useState(null);
 	const {
 		state,
-		actions: { addToCollection },
+		actions: { addToCollection, removeFromCollection },
 	} = useContext(UserContext);
 
 	// console.log(fetchList);
@@ -29,7 +29,7 @@ const CritterInfo = () => {
 			})
 			.catch((err) => console.error(err));
 	}, []);
-
+	console.log(state);
 	return (
 		detailedCritter && (
 			<Wrapper>
@@ -54,9 +54,15 @@ const CritterInfo = () => {
 						? "All Months"
 						: detailedCritter.availability["month-southern"]}
 				</div>
-				<button onClick={() => addToCollection(category, id)}>
-					Add to Collection
-				</button>
+				{state[category].includes(id) ? (
+					<button onClick={() => removeFromCollection(category, id)}>
+						Remove from Collection
+					</button>
+				) : (
+					<button onClick={() => addToCollection(category, id)}>
+						Add to Collection
+					</button>
+				)}
 			</Wrapper>
 		)
 	);

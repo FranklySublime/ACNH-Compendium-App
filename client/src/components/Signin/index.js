@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/UserContext";
 
 const Signin = () => {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
+	const {
+		actions: { triggerReload },
+	} = useContext(UserContext);
 
 	let navigate = useNavigate();
 
@@ -25,6 +29,7 @@ const Signin = () => {
 			.then((json) => {
 				console.log("JSON", json);
 				localStorage.setItem("_id", json.data);
+				triggerReload();
 				navigate("../", { replace: true });
 			});
 	};

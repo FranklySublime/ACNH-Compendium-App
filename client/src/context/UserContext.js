@@ -13,6 +13,28 @@ export const UserProvider = ({ children }) => {
 		});
 	};
 
+	// check whether we need a reload of our state
+
+	const triggerReload = () => {
+		dispatch({
+			type: "trigger-reload",
+		});
+	};
+
+	// checks localStorage for user _id, if found, it fetches.
+	useEffect(() => {
+		let _id = localStorage.getItem("_id");
+
+		_id &&
+			fetch(`/user/${_id}`)
+				.then((res) => res.json())
+				.then((data) => {
+					receiveUserFromServer(data);
+					console.log(data);
+				});
+	}, [state.reload]);
+
+	// adds the current item to a users collection
 	const addToCollection = (collection, data) => {
 		console.log(data);
 		let _id = localStorage.getItem("_id");
@@ -38,26 +60,41 @@ export const UserProvider = ({ children }) => {
 		});
 	};
 
-	// checks localStorage for user _id, if found, it fetches.
-	useEffect(() => {
+	// removes the current item to a users collection
+	const removeFromCollection = (collection, data) => {
+		console.log(data);
 		let _id = localStorage.getItem("_id");
 
-		_id &&
-			fetch(`/user/${_id}`)
-				.then((res) => res.json())
-				.then((data) => {
-					receiveUserFromServer(data);
-					console.log(data);
-				});
-	}, []);
+		fetch(`/user/collection/${collection}/${data}`, {
+			method: "DELETE",
+			body: JSON.stringify({
+				_id: _id,
+			}),
+			headers: {
+				Accept: "application/json",
+				"Content-type": "application/json",
+			},
+		})
+			.then((res) => res.json())
+			.then((json) => {
+				console.log("JSON", json);
+			});
+		dispatch({
+			type: "remove-from-collection",
+			data,
+			collection,
+		});
+	};
 
 	return (
 		<UserContext.Provider
 			value={{
 				state,
 				actions: {
+					triggerReload,
 					receiveUserFromServer,
 					addToCollection,
+					removeFromCollection,
 				},
 			}}
 		>

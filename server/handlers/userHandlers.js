@@ -180,7 +180,6 @@ const addToCollection = async (req, res) => {
 	const client = new MongoClient(MONGO_URI, options);
 	const category = req.params.category;
 	const filename = req.params.id;
-	// "user/collection/:category/:id";
 	const { _id } = req.body;
 	const query = `collections.${category}`;
 
@@ -194,8 +193,6 @@ const addToCollection = async (req, res) => {
 				{ _id: ObjectId(_id) },
 				{ $push: { [query]: filename } }
 			);
-		//   { _id: flight, "seats.id": seat },
-		//   { $set: { "seats.$.isAvailable": false } }
 		res.status(200).json({
 			status: 200,
 			data: filename,
@@ -213,4 +210,46 @@ const addToCollection = async (req, res) => {
 	}
 };
 
-module.exports = { createAccount, signin, getUser, addToCollection };
+// handler for removing item to current user's collection
+
+const removeFromCollection = async (req, res) => {
+	const client = await new MongoClient(MONGO_URI, options);
+
+	const category = req.params.category;
+	const filename = req.params.id;
+	const { _id } = req.body;
+	const query = `collections.${category}`;
+
+	try {
+		await client.connect();
+		const db = await client.db("users");
+		const account = await db
+			.collection("accounts")
+			.updateOne(
+				{ _id: ObjectId(_id) },
+				{ $pull: { [query]: filename } }
+			);
+		res.status(200).json({
+			status: 200,
+			data: filename,
+			message: "item successfully removed",
+		});
+	} catch (err) {
+		res.status(500).json({
+			status: 500,
+			data: {},
+			message: err.message,
+		});
+	} finally {
+		client.close();
+		console.log("disconnected");
+	}
+};
+
+module.exports = {
+	createAccount,
+	signin,
+	getUser,
+	addToCollection,
+	removeFromCollection,
+};

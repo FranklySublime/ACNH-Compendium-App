@@ -1,6 +1,7 @@
 export const initialState = {
 	_id: null,
 	username: null,
+	reload: false,
 	bugs: [],
 	fish: [],
 	sea: [],
@@ -11,7 +12,13 @@ export const initialState = {
 
 export const reducer = (state, action) => {
 	console.log(action);
+	let category = action.collection;
 	switch (action.type) {
+		case "trigger-reload":
+			return {
+				...state,
+				reload: !state.reload,
+			};
 		case "receive-user-from-server":
 			return {
 				...state,
@@ -25,10 +32,14 @@ export const reducer = (state, action) => {
 				music: action.music,
 			};
 		case "add-to-collection":
-			let category = action.collection;
+			state[category].push(action.data);
 			return {
 				...state,
-				[state[category]]: state[category].push(action.data),
+			};
+		case "remove-from-collection":
+			state[category].splice(state[category].indexOf(action.data), 1);
+			return {
+				...state,
 			};
 		default:
 			throw new Error(
