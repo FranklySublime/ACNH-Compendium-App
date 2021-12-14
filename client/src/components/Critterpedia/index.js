@@ -6,9 +6,9 @@ import { Link } from "react-router-dom";
 import { WikiContext } from "../../context/WikiContext";
 
 // importing styling stuff
-import styled from "styled-components";
+import { ItemList, Wrapper } from "./styled-components";
 
-const Wiki = () => {
+const Critterpedia = () => {
 	const [itemList, setItemList] = useState(null);
 	const { fetchList, setFetchList } = useContext(WikiContext);
 
@@ -37,7 +37,7 @@ const Wiki = () => {
 					return (
 						<Wrapper key={item._id}>
 							<Link
-								to={`/wiki/${fetchList}/${item["file-name"]}`}
+								to={`/critterpedia/${fetchList}/${item["file-name"]}`}
 							>
 								<div>{item.name["name-USen"]}</div>
 								<img
@@ -53,23 +53,4 @@ const Wiki = () => {
 	);
 };
 
-const ItemList = styled.div`
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	align-items: center;
-	justify-content: center;
-	/* display: grid;
-	grid-template-columns: 50px 50px 50px 50px; */
-`;
-
-const Wrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	border: 2px solid var(--primary-color);
-	margin: 5px;
-`;
-
-export default Wiki;
+export default Critterpedia;

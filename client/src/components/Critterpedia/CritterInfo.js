@@ -54,7 +54,7 @@ const CritterInfo = () => {
 						? "All Months"
 						: detailedCritter.availability["month-southern"]}
 				</div>
-				{state[category].includes(id) ? (
+				{state[category]?.includes(id) ? (
 					<button onClick={() => removeFromCollection(category, id)}>
 						Remove from Collection
 					</button>

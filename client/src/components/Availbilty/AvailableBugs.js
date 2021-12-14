@@ -17,7 +17,7 @@ const AvailableBugs = () => {
 				{availableBugs.map((bug) => {
 					return (
 						<Link
-							to={`/wiki/bugs/${bug.filename}`}
+							to={`/critterpedia/bugs/${bug.filename}`}
 							key={bug.filename}
 						>
 							<img src={bug.iconSrc} alt={bug.name} />

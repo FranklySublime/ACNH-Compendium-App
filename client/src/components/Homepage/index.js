@@ -10,16 +10,21 @@ import AvailableSea from "../Availbilty/AvailableSea";
 
 // importing styling
 import styled from "styled-components";
+import Critterpedia from "../Critterpedia";
 
 const Homepage = () => {
 	let navigate = useNavigate();
-	const handleClick = () => {
-		navigate("/wiki");
+	const handleClick = (e) => {
+		navigate(`/${e}`);
 	};
 	return (
 		<Wrapper>
 			<div>This is the homepage!</div>
-			<button onClick={handleClick}>Critterpdia</button>
+			<button onClick={() => handleClick("critterpedia")}>
+				Critterpdia
+			</button>
+			<button onClick={() => handleClick("museum")}>Museum</button>
+			<button onClick={() => handleClick("music")}>Music</button>
 			<DailyTasks />
 			<AvailableBugs />
 			<AvailableFish />

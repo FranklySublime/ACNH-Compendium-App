@@ -17,7 +17,7 @@ const AvailableFish = () => {
 				{availableFish.map((fish) => {
 					return (
 						<Link
-							to={`/wiki/fish/${fish.filename}`}
+							to={`/critterpedia/fish/${fish.filename}`}
 							key={fish.filename}
 						>
 							<img src={fish.iconSrc} alt={fish.name} />

@@ -9,14 +9,18 @@ import { UserProvider } from "./context/UserContext";
 // components import
 import Header from "./components/Header";
 import Homepage from "./components/Homepage";
-import Wiki from "./components/Wiki";
-import CritterInfo from "./components/Wiki/CritterInfo";
+import Critterpedia from "./components/Critterpedia";
+import CritterInfo from "./components/Critterpedia/CritterInfo";
+import Museum from "./components/Museum";
+import Music from "./components/Music";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
 
 //styling imports
 import GlobalStyles from "./GlobalStyles";
 import styled from "styled-components";
+import AlbumInfo from "./components/Music/AlbumInfo";
+import ArtifactInfo from "./components/Museum/ArtifactInfo";
 
 function App() {
 	return (
@@ -29,11 +33,23 @@ function App() {
 						<H1> Hello world 🌍 </H1>
 						<Routes>
 							<Route path="/" element={<Homepage />} />
-							<Route path="/wiki" element={<Wiki />} />
 							<Route
-								path="/wiki/:category/:id"
+								path="/critterpedia"
+								element={<Critterpedia />}
+							/>
+							<Route
+								path="/critterpedia/:category/:id"
 								element={<CritterInfo />}
 							/>
+							<Route path="/museum" element={<Museum />} />
+							<Route
+								path="/museum/:category/:id"
+								element={<ArtifactInfo />}
+							/>
+
+							<Route path="/music" element={<Music />} />
+							<Route path="/music/:id" element={<AlbumInfo />} />
+
 							<Route path="/signin" element={<Signin />} />
 							<Route path="/signup" element={<Signup />} />
 						</Routes>
