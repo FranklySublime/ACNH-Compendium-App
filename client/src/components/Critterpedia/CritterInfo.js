@@ -3,22 +3,18 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 
 // importing context
-import { WikiContext } from "../../context/WikiContext";
 import { UserContext } from "../../context/UserContext";
 
 // importing styling
-import styled from "styled-components";
+import { Wrapper } from "./styled-components";
 
 const CritterInfo = () => {
-	// const { fetchList } = useContext(WikiContext);
 	const { category, id } = useParams();
 	const [detailedCritter, setDetailedCritter] = useState(null);
 	const {
 		state,
 		actions: { addToCollection, removeFromCollection },
 	} = useContext(UserContext);
-
-	// console.log(fetchList);
 
 	useEffect(() => {
 		fetch(`/${category}/${id}`)
@@ -67,7 +63,5 @@ const CritterInfo = () => {
 		)
 	);
 };
-
-const Wrapper = styled.div``;
 
 export default CritterInfo;
