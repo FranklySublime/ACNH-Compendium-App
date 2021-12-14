@@ -5,7 +5,7 @@ export const initialState = {
 	bugs: [],
 	fish: [],
 	sea: [],
-	fossils: [],
+	fossil: [],
 	art: [],
 	music: [],
 };
@@ -27,7 +27,7 @@ export const reducer = (state, action) => {
 				bugs: action.bugs,
 				fish: action.fish,
 				sea: action.sea,
-				fossils: action.fossils,
+				fossil: action.fossil,
 				art: action.art,
 				music: action.music,
 			};

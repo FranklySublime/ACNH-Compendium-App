@@ -30,7 +30,7 @@ const createAccount = async (req, res) => {
 		let bugs = [];
 		let fish = [];
 		let sea = [];
-		let fossils = [];
+		let fossil = [];
 		let art = [];
 		let music = [];
 
@@ -40,7 +40,7 @@ const createAccount = async (req, res) => {
 			password: hash,
 			firstName,
 			lastName,
-			collections: { bugs, fish, sea, fossils, art, music },
+			collections: { bugs, fish, sea, fossil, art, music },
 		};
 
 		const user = await db.collection("accounts").findOne({
@@ -156,7 +156,7 @@ const getUser = async (req, res) => {
 			bugs: user.collections.bugs,
 			fish: user.collections.fish,
 			sea: user.collections.sea,
-			fossils: user.collections.fossils,
+			fossil: user.collections.fossil,
 			art: user.collections.art,
 			music: user.collections.music,
 			message: "༼ つ ◕_◕ ༽つ console.log(user_data) ༼ つ ◕_◕ ༽つ",
