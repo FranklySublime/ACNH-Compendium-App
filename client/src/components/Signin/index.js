@@ -5,6 +5,7 @@ import { UserContext } from "../../context/UserContext";
 const Signin = () => {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
+	const [error, setError] = useState(false);
 	const {
 		actions: { triggerReload },
 	} = useContext(UserContext);
@@ -27,10 +28,17 @@ const Signin = () => {
 		})
 			.then((res) => res.json())
 			.then((json) => {
-				console.log("JSON", json);
-				localStorage.setItem("_id", json.data);
-				triggerReload();
-				navigate("../", { replace: true });
+				if (json.status === 200) {
+					console.log("JSON", json);
+					localStorage.setItem("_id", json.data);
+					triggerReload();
+					// navigate("../", { replace: true });
+				} else {
+					setError(true);
+				}
+			})
+			.catch((e) => {
+				console.log(e);
 			});
 	};
 
@@ -53,6 +61,9 @@ const Signin = () => {
 			</form>
 			<div>Don't have an account?</div>
 			<Link to="/signup">Sign up</Link>
+			{error && (
+				<div> Looks like the username or password is incorrect </div>
+			)}
 		</div>
 	);
 };
