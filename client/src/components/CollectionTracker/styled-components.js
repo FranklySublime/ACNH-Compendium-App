@@ -7,11 +7,11 @@ export const Wrapper = styled.div`
 	border: 5px solid var(--secondary-color);
 	border-radius: 20px;
 	padding: 15px;
-    background
+	background: var(--background-fade);
 `;
 
 export const Title = styled.h1`
-	color: var(--secondary-color);
+	color: var(--just-white);
 `;
 
 export const ProgressBar = styled.div`
@@ -23,7 +23,6 @@ export const ProgressBar = styled.div`
 export const ProgressWrapper = styled.div`
 	display: flex;
 	align-items: flex-start;
-	/* border: 3px solid var(--primary-color); */
 	background-color: var(--accent-color);
 	margin: 5px;
 	width: 300px;

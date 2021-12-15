@@ -6,6 +6,8 @@ import {
 	Wrapper,
 	Image,
 	ImageWrapper,
+	Title,
+	CenterWrapper,
 } from "./styled-components";
 
 const AvailableSea = () => {
@@ -20,20 +22,27 @@ const AvailableSea = () => {
 	return (
 		availableSea && (
 			<>
-				<div>Sea Creatures Available to Catch</div>
 				<Wrapper>
-					{availableSea.map((sea) => {
-						return (
-							<Link
-								to={`/critterpedia/sea/${sea.filename}`}
-								key={sea.filename}
-							>
-								<ImageWrapper>
-									<Image src={sea.iconSrc} alt={sea.name} />
-								</ImageWrapper>
-							</Link>
-						);
-					})}
+					<Title>Sea Creatures Available to Catch</Title>
+					<CenterWrapper>
+						<CritterWrapper>
+							{availableSea.map((sea) => {
+								return (
+									<Link
+										to={`/critterpedia/sea/${sea.filename}`}
+										key={sea.filename}
+									>
+										<ImageWrapper>
+											<Image
+												src={sea.iconSrc}
+												alt={sea.name}
+											/>
+										</ImageWrapper>
+									</Link>
+								);
+							})}
+						</CritterWrapper>
+					</CenterWrapper>
 				</Wrapper>
 			</>
 		)

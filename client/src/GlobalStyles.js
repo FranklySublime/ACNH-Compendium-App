@@ -8,6 +8,7 @@ export default createGlobalStyle`
       --accent-color: #CBF3F0;
       --just-white: #FFFFFF;
       --faded-color: #FFBF69;
+      --background-fade: rgba(255, 191, 105, 0.6);
       --secondary-color: #FF9F1C;
       --page-horizontal-padding: 20px;
       --header-height: 50px;

@@ -7,6 +7,8 @@ import {
 	Wrapper,
 	Image,
 	ImageWrapper,
+	Title,
+	CenterWrapper,
 } from "./styled-components";
 
 const AvailableBugs = () => {
@@ -21,25 +23,27 @@ const AvailableBugs = () => {
 	return (
 		availableBugs && (
 			<>
-				<div>Bugs Available to Catch</div>
 				<Wrapper>
-					{availableBugs.map((bug) => {
-						return (
-							<CritterWrapper>
-								<Link
-									to={`/critterpedia/bugs/${bug.filename}`}
-									key={bug.filename}
-								>
-									<ImageWrapper>
-										<Image
-											src={bug.iconSrc}
-											alt={bug.name}
-										/>
-									</ImageWrapper>
-								</Link>
-							</CritterWrapper>
-						);
-					})}
+					<Title>Bugs Available to Catch</Title>
+					<CenterWrapper>
+						<CritterWrapper>
+							{availableBugs.map((bug) => {
+								return (
+									<Link
+										to={`/critterpedia/bugs/${bug.filename}`}
+										key={bug.filename}
+									>
+										<ImageWrapper>
+											<Image
+												src={bug.iconSrc}
+												alt={bug.name}
+											/>
+										</ImageWrapper>
+									</Link>
+								);
+							})}
+						</CritterWrapper>
+					</CenterWrapper>
 				</Wrapper>
 			</>
 		)
