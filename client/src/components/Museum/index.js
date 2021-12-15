@@ -1,36 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { Link } from "react-router-dom";
+
+import { WikiContext } from "../../context/WikiContext";
 
 import { ItemList, Wrapper } from "./styled-components";
 
 const Museum = () => {
-	const [itemList, setItemList] = useState(null);
-	const [fetchList, setFetchList] = useState("fossil");
-	useEffect(() => {
-		fetch(`/${fetchList}`)
-			.then((res) => res.json())
-			.then((data) => {
-				console.log("JSON", data);
-				setItemList(data.data);
-				console.log(itemList);
-			})
-			.catch((err) => console.error(err));
-	}, [fetchList]);
+	const { artifactList, setArtifactList, museumList } =
+		useContext(WikiContext);
 
-	console.log(fetchList);
+	console.log(artifactList);
 
 	return (
 		<div>
 			<div> sup Blathers</div>
-			<button onClick={() => setFetchList("fossil")}>Fossils</button>
-			<button onClick={() => setFetchList("art")}>Art</button>
+			<button onClick={() => setArtifactList("fossil")}>Fossils</button>
+			<button onClick={() => setArtifactList("art")}>Art</button>
 
 			<ItemList>
-				{itemList?.map((item) => {
+				{museumList?.map((item) => {
 					return (
 						<Wrapper key={item._id}>
 							<Link
-								to={`/museum/${fetchList}/${item["file-name"]}`}
+								to={`/museum/${artifactList}/${item["file-name"]}`}
 							>
 								<div>{item.name["name-USen"]}</div>
 								<img

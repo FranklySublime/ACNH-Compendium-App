@@ -33,7 +33,6 @@ const Wrapper = styled.div`
 
 const LogoImg = styled.img`
 	height: 50px;
-	color: var(--just-white);
 `;
 
 export default Header;

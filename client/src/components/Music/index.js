@@ -1,29 +1,19 @@
 // importing react
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import { WikiContext } from "../../context/WikiContext";
 
 // importing styling stuff
 import { ItemList, Wrapper } from "./styled-components";
 
 const Music = () => {
-	const [itemList, setItemList] = useState(null);
-
-	useEffect(() => {
-		fetch("/music")
-			.then((res) => res.json())
-			.then((data) => {
-				console.log("JSON", data);
-				setItemList(data.data);
-				console.log(itemList);
-			})
-			.catch((err) => console.error(err));
-	}, []);
+	const { musicList } = useContext(WikiContext);
 
 	return (
 		<div>
 			<p>D.J. K.K. In the House!</p>
 			<ItemList>
-				{itemList?.map((item) => {
+				{musicList?.map((item) => {
 					return (
 						<Wrapper key={item._id}>
 							<Link to={`/music/${item["file-name"]}`}>
