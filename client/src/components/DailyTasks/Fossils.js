@@ -3,12 +3,12 @@ import React from "react";
 
 // importing styling stuff
 import styled from "styled-components";
-import { Box, ImageWrapper, Image } from "./styled-components";
+import { Box, ImageWrapper, Image, Title } from "./styled-components";
 
 const Fossils = () => {
 	return (
 		<div>
-			<div>Fossils, Money Tree, and DIY Recipe Bottle</div>
+			<Title>Fossils, Money Tree, and DIY Recipe Bottle</Title>
 			<Box>
 				<ImageWrapper>
 					<Image

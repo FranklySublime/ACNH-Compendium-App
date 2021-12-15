@@ -25,7 +25,6 @@ const Homepage = () => {
 	};
 	return (
 		<Wrapper>
-			<div>This is the homepage!</div>
 			<button onClick={() => handleClick("critterpedia")}>
 				Critterpdia
 			</button>

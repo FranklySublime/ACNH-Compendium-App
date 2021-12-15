@@ -6,15 +6,15 @@ import Fossils from "./Fossils";
 import Rocks from "./Rocks";
 
 // importing styling stuff
-import styled from "styled-components";
+import { Wrapper, Title } from "./styled-components";
 
 const DailyTasks = () => {
 	return (
-		<>
-			<div>Daily Tasks</div>
+		<Wrapper>
+			<Title>Daily Tasks</Title>
 			<Fossils />
 			<Rocks />
-		</>
+		</Wrapper>
 	);
 };
 
