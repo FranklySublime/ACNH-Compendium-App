@@ -2,6 +2,13 @@ import React, { useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
 
+import {
+	CritterWrapper,
+	Wrapper,
+	Image,
+	ImageWrapper,
+} from "./styled-components";
+
 const AvailableFish = () => {
 	const [availableFish, setAvailableFish] = useState(null);
 
@@ -13,18 +20,23 @@ const AvailableFish = () => {
 
 	return (
 		availableFish && (
-			<div>
-				{availableFish.map((fish) => {
-					return (
-						<Link
-							to={`/critterpedia/fish/${fish.filename}`}
-							key={fish.filename}
-						>
-							<img src={fish.iconSrc} alt={fish.name} />
-						</Link>
-					);
-				})}
-			</div>
+			<>
+				<div>Fish Available to Catch</div>
+				<Wrapper>
+					{availableFish.map((fish) => {
+						return (
+							<Link
+								to={`/critterpedia/fish/${fish.filename}`}
+								key={fish.filename}
+							>
+								<ImageWrapper>
+									<Image src={fish.iconSrc} alt={fish.name} />
+								</ImageWrapper>
+							</Link>
+						);
+					})}
+				</Wrapper>
+			</>
 		)
 	);
 };

@@ -5,8 +5,10 @@ const Signup = () => {
 	const [username, setUsername] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [confirmPassword, setConfirmPassword] = useState("");
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
+	const [error, setError] = useState(false);
 
 	let navigate = useNavigate();
 
@@ -29,8 +31,15 @@ const Signup = () => {
 		})
 			.then((res) => res.json())
 			.then((json) => {
-				console.log("JSON", json);
-				navigate("../signin", { replace: true });
+				if (json.status === 200) {
+					console.log("JSON", json);
+					navigate("../signin", { replace: true });
+				} else if (json.status === 409) {
+					setError(true);
+				}
+			})
+			.catch((e) => {
+				console.log(e);
 			});
 	};
 
@@ -56,6 +65,12 @@ const Signup = () => {
 					onChange={(e) => setPassword(e.target.value)}
 				/>
 				<input
+					type="password"
+					placeholder="Confirm Password"
+					value={confirmPassword}
+					onChange={(e) => setConfirmPassword(e.target.value)}
+				/>
+				<input
 					type="text"
 					placeholder="First Name"
 					value={firstName}
@@ -68,6 +83,12 @@ const Signup = () => {
 					onChange={(e) => setLastName(e.target.value)}
 				/>
 				<button>Create Account</button>
+				{error && (
+					<div>
+						Looks like that username or email has already been
+						registered.
+					</div>
+				)}
 			</form>
 		</div>
 	);
