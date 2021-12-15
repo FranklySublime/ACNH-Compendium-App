@@ -6,7 +6,16 @@ import { Link } from "react-router-dom";
 import { WikiContext } from "../../context/WikiContext";
 
 // importing styling stuff
-import { ItemList, Wrapper } from "./styled-components";
+import {
+	ItemList,
+	Wrapper,
+	UnstyledButton,
+	ButtonImage,
+	ButtonBackground,
+} from "./styled-components";
+import Bug from "../../assets/Bug_NH_Icon.png";
+import Fish from "../../assets/Fish_NH_Icon.png";
+import Sea from "../../assets/Sea_Creature_NH_Icon.png";
 
 const Critterpedia = () => {
 	const { critterList, setCritterList, itemList } = useContext(WikiContext);
@@ -15,10 +24,21 @@ const Critterpedia = () => {
 
 	return (
 		<>
-			<div>Welcome to the Critterpedia page!</div>
-			<button onClick={() => setCritterList("bugs")}>Bugs</button>
-			<button onClick={() => setCritterList("fish")}>Fish</button>
-			<button onClick={() => setCritterList("sea")}>Sea Critters</button>
+			<UnstyledButton onClick={() => setCritterList("bugs")}>
+				<ButtonBackground>
+					<ButtonImage src={Bug} />
+				</ButtonBackground>
+			</UnstyledButton>
+			<UnstyledButton onClick={() => setCritterList("fish")}>
+				<ButtonBackground>
+					<ButtonImage src={Fish} />
+				</ButtonBackground>
+			</UnstyledButton>
+			<UnstyledButton onClick={() => setCritterList("sea")}>
+				<ButtonBackground>
+					<ButtonImage src={Sea} />
+				</ButtonBackground>
+			</UnstyledButton>
 
 			<ItemList>
 				{itemList?.map((item) => {

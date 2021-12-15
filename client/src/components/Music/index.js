@@ -11,7 +11,6 @@ const Music = () => {
 
 	return (
 		<div>
-			<p>D.J. K.K. In the House!</p>
 			<ItemList>
 				{musicList?.map((item) => {
 					return (

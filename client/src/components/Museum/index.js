@@ -3,8 +3,14 @@ import { Link } from "react-router-dom";
 
 import { WikiContext } from "../../context/WikiContext";
 
-import { ItemList, Wrapper } from "./styled-components";
-
+import {
+	ItemList,
+	Wrapper,
+	UnstyledButton,
+	ButtonImage,
+	ButtonBackground,
+} from "./styled-components";
+import Painting from "../../assets/Famous_Painting_NH_Icon.png";
 const Museum = () => {
 	const { artifactList, setArtifactList, museumList } =
 		useContext(WikiContext);
@@ -13,9 +19,18 @@ const Museum = () => {
 
 	return (
 		<div>
-			<div> sup Blathers</div>
-			<button onClick={() => setArtifactList("fossil")}>Fossils</button>
-			<button onClick={() => setArtifactList("art")}>Art</button>
+			<UnstyledButton onClick={() => setArtifactList("fossil")}>
+				<ButtonBackground>
+					<ButtonImage
+						src={"https://acnhcdn.com/latest/MenuIcon/Fossil.png"}
+					/>
+				</ButtonBackground>
+			</UnstyledButton>
+			<UnstyledButton onClick={() => setArtifactList("art")}>
+				<ButtonBackground>
+					<ButtonImage src={Painting} />
+				</ButtonBackground>
+			</UnstyledButton>
 
 			<ItemList>
 				{museumList?.map((item) => {

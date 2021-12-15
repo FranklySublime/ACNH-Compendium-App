@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 
+import { Wrapper, Input, FormWrapper } from "./styled-components";
+
 const Signin = () => {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
@@ -43,28 +45,30 @@ const Signin = () => {
 	};
 
 	return (
-		<div>
-			<form onSubmit={(e) => handleSignin(e)}>
-				<input
+		<Wrapper>
+			<FormWrapper onSubmit={(e) => handleSignin(e)}>
+				<label>Username :</label>
+				<Input
 					type="text"
 					placeholder="Username"
 					value={username}
 					onChange={(e) => setUsername(e.target.value)}
 				/>
-				<input
+				<label>Password :</label>
+				<Input
 					type="password"
 					placeholder="Password"
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
 				/>
 				<button>Sign-In</button>
-			</form>
+			</FormWrapper>
 			<div>Don't have an account?</div>
 			<Link to="/signup">Sign up</Link>
 			{error && (
 				<div> Looks like the username or password is incorrect </div>
 			)}
-		</div>
+		</Wrapper>
 	);
 };
 
