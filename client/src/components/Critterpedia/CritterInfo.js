@@ -5,6 +5,9 @@ import { useParams } from "react-router";
 // importing context
 import { UserContext } from "../../context/UserContext";
 
+// importing helper
+import { capitalizeNames, rangeToMonth } from "../../helpers";
+
 // importing styling
 import { Wrapper } from "./styled-components";
 
@@ -25,11 +28,11 @@ const CritterInfo = () => {
 			})
 			.catch((err) => console.error(err));
 	}, []);
-	console.log(state);
+
 	return (
 		detailedCritter && (
 			<Wrapper>
-				<div>{detailedCritter.name["name-USen"]}</div>
+				<div>{capitalizeNames(detailedCritter.name["name-USen"])}</div>
 				<img
 					src={detailedCritter.image_uri}
 					alt={detailedCritter.name["name-USen"]}
@@ -42,13 +45,17 @@ const CritterInfo = () => {
 					Nothern Hemisphere:{" "}
 					{detailedCritter.availability.isAllYear
 						? "All Months"
-						: detailedCritter.availability["month-northern"]}
+						: rangeToMonth(
+								detailedCritter.availability["month-northern"]
+						  )}
 				</div>
 				<div>
 					Southern Hemisphere:{" "}
 					{detailedCritter.availability.isAllYear
 						? "All Months"
-						: detailedCritter.availability["month-southern"]}
+						: rangeToMonth(
+								detailedCritter.availability["month-southern"]
+						  )}
 				</div>
 				{state[category]?.includes(id) ? (
 					<button onClick={() => removeFromCollection(category, id)}>

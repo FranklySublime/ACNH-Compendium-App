@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-
+import React, { useContext, useEffect, useState } from "react";
+import { UserContext } from "../../context/UserContext";
 import { Link } from "react-router-dom";
 
 import {
@@ -9,9 +9,11 @@ import {
 	ImageWrapper,
 	Title,
 	CenterWrapper,
+	CaughtWrapper,
 } from "./styled-components";
 
 const AvailableBugs = () => {
+	const { state } = useContext(UserContext);
 	const [availableBugs, setAvailableBugs] = useState(null);
 
 	useEffect(() => {
@@ -33,12 +35,21 @@ const AvailableBugs = () => {
 										to={`/critterpedia/bugs/${bug.filename}`}
 										key={bug.filename}
 									>
-										<ImageWrapper>
-											<Image
-												src={bug.iconSrc}
-												alt={bug.name}
-											/>
-										</ImageWrapper>
+										{state?.bugs.includes(bug.filename) ? (
+											<CaughtWrapper>
+												<Image
+													src={bug.iconSrc}
+													alt={bug.name}
+												/>
+											</CaughtWrapper>
+										) : (
+											<ImageWrapper>
+												<Image
+													src={bug.iconSrc}
+													alt={bug.name}
+												/>
+											</ImageWrapper>
+										)}
 									</Link>
 								);
 							})}

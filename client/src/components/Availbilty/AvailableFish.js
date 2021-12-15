@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../context/UserContext";
 
 import {
 	CritterWrapper,
@@ -9,9 +9,11 @@ import {
 	ImageWrapper,
 	Title,
 	CenterWrapper,
+	CaughtWrapper,
 } from "./styled-components";
 
 const AvailableFish = () => {
+	const { state } = useContext(UserContext);
 	const [availableFish, setAvailableFish] = useState(null);
 
 	useEffect(() => {
@@ -33,12 +35,21 @@ const AvailableFish = () => {
 										to={`/critterpedia/fish/${fish.filename}`}
 										key={fish.filename}
 									>
-										<ImageWrapper>
-											<Image
-												src={fish.iconSrc}
-												alt={fish.name}
-											/>
-										</ImageWrapper>
+										{state?.fish.includes(fish.filename) ? (
+											<CaughtWrapper>
+												<Image
+													src={fish.iconSrc}
+													alt={fish.name}
+												/>
+											</CaughtWrapper>
+										) : (
+											<ImageWrapper>
+												<Image
+													src={fish.iconSrc}
+													alt={fish.name}
+												/>
+											</ImageWrapper>
+										)}
 									</Link>
 								);
 							})}

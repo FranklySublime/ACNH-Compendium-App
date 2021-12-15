@@ -5,6 +5,9 @@ import { useParams } from "react-router";
 // importing context
 import { UserContext } from "../../context/UserContext";
 
+//importing helpers
+import { capitalizeNames } from "../../helpers";
+
 // importing styling
 import { Wrapper } from "./styled-components";
 
@@ -30,7 +33,7 @@ const ArtifactInfo = () => {
 	return (
 		detailedArtifact && (
 			<Wrapper>
-				<div>{detailedArtifact.name["name-USen"]}</div>
+				<div>{capitalizeNames(detailedArtifact.name["name-USen"])}</div>
 				<img
 					src={detailedArtifact.image_uri}
 					alt={detailedArtifact.name["name-USen"]}

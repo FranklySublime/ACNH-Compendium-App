@@ -34,6 +34,15 @@ export const ImageWrapper = styled.div`
 	margin: 5px;
 `;
 
+export const CaughtWrapper = styled.div`
+	background-color: var(--accent-color);
+	border: 3px solid var(--primary-color);
+	border-radius: 50%;
+	height: 120px;
+	width: 120px;
+	margin: 5px;
+`;
+
 export const Image = styled.img`
 	height: 120px;
 	width: 120px;

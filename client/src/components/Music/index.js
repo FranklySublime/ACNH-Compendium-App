@@ -1,32 +1,63 @@
 // importing react
 import React, { useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+
+import { UserContext } from "../../context/UserContext";
 import { WikiContext } from "../../context/WikiContext";
 
 // importing styling stuff
-import { ItemList, Wrapper } from "./styled-components";
+import {
+	WikiWrapper,
+	ItemList,
+	ItemWrapper,
+	AlbumWrapper,
+	AlbumImage,
+	CaughtWrapper,
+	Title,
+	SyledLink,
+} from "./styled-components";
 
 const Music = () => {
+	const { state } = useContext(UserContext);
 	const { musicList } = useContext(WikiContext);
 
 	return (
-		<div>
+		<WikiWrapper>
 			<ItemList>
 				{musicList?.map((item) => {
-					return (
-						<Wrapper key={item._id}>
-							<Link to={`/music/${item["file-name"]}`}>
-								<div>{item.name["name-USen"]}</div>
-								<img
-									src={item.image_uri}
-									alt={item["file-name"]}
-								/>
-							</Link>
-						</Wrapper>
+					return state.music?.includes(item["file-name"]) ? (
+						<SyledLink
+							to={`/music/${item["file-name"]}`}
+							key={item._id}
+						>
+							<ItemWrapper>
+								<Title>{item.name["name-USen"]}</Title>
+								<CaughtWrapper>
+									<AlbumImage
+										src={item.image_uri}
+										alt={item["file-name"]}
+									/>
+								</CaughtWrapper>
+							</ItemWrapper>
+						</SyledLink>
+					) : (
+						<SyledLink
+							to={`/music/${item["file-name"]}`}
+							key={item._id}
+						>
+							<ItemWrapper>
+								<Title>{item.name["name-USen"]}</Title>
+								<AlbumWrapper>
+									<AlbumImage
+										src={item.image_uri}
+										alt={item["file-name"]}
+									/>
+								</AlbumWrapper>
+							</ItemWrapper>
+						</SyledLink>
 					);
 				})}
 			</ItemList>
-		</div>
+		</WikiWrapper>
 	);
 };
 
