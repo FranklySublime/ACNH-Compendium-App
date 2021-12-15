@@ -8,6 +8,7 @@ import { UserProvider } from "./context/UserContext";
 
 // components import
 import Header from "./components/Header";
+import SubHeader from "./components/SubHeader";
 import Homepage from "./components/Homepage";
 import Critterpedia from "./components/Critterpedia";
 import CritterInfo from "./components/Critterpedia/CritterInfo";
@@ -30,7 +31,7 @@ function App() {
 					<GlobalStyles />
 					<Wrapper>
 						<Header />
-						<H1> Hello world 🌍 </H1>
+						<SubHeader />
 						<Routes>
 							<Route path="/" element={<Homepage />} />
 							<Route
@@ -61,9 +62,5 @@ function App() {
 }
 
 const Wrapper = styled.div``;
-
-const H1 = styled.h1`
-	background-color: var(--accent-color);
-`;
 
 export default App;
