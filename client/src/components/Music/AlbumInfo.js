@@ -6,7 +6,15 @@ import { useParams } from "react-router";
 import { UserContext } from "../../context/UserContext";
 
 // importing styling
-import { Wrapper } from "./styled-components";
+import {
+	Wrapper,
+	Title,
+	Image,
+	DetailsImageWrappper,
+	ImageWrapper,
+	InfoWrapper,
+	Bold,
+} from "./styled-components";
 
 const AlbumInfo = () => {
 	const { id } = useParams();
@@ -31,29 +39,42 @@ const AlbumInfo = () => {
 	return (
 		detailedAlbum && (
 			<Wrapper>
-				<div>{detailedAlbum.name["name-USen"]}</div>
-				<img
-					src={detailedAlbum.image_uri}
-					alt={detailedAlbum.name["name-USen"]}
-				/>
-				<h1>Album Info</h1>
-				<div>
-					Is Orderable Through: {detailedAlbum.isOrderable.toString()}
-				</div>
-				<div>Price: {detailedAlbum["sell-price"]} bells</div>
-				<audio controls>
-					<source src={detailedAlbum.music_uri} />
-				</audio>
+				<DetailsImageWrappper>
+					<Title>{detailedAlbum.name["name-USen"]}</Title>
+					<ImageWrapper>
+						<Image
+							src={detailedAlbum.image_uri}
+							alt={detailedAlbum.name["name-USen"]}
+						/>
+					</ImageWrapper>
+				</DetailsImageWrappper>
+				<InfoWrapper>
+					<Title>Album Info</Title>
+					<div>
+						{detailedAlbum.isOrderable
+							? "Is orderable through Nook Shopping"
+							: "Only availble by catching K.K.'s set"}
+					</div>
+					<div>
+						<Bold>Price:</Bold>
+						{detailedAlbum["sell-price"]} bells
+					</div>
+					<audio controls>
+						<source src={detailedAlbum.music_uri} />
+					</audio>
 
-				{state[category]?.includes(id) ? (
-					<button onClick={() => removeFromCollection(category, id)}>
-						Remove from Collection
-					</button>
-				) : (
-					<button onClick={() => addToCollection(category, id)}>
-						Add to Collection
-					</button>
-				)}
+					{state[category]?.includes(id) ? (
+						<button
+							onClick={() => removeFromCollection(category, id)}
+						>
+							Remove from Collection
+						</button>
+					) : (
+						<button onClick={() => addToCollection(category, id)}>
+							Add to Collection
+						</button>
+					)}
+				</InfoWrapper>
 			</Wrapper>
 		)
 	);

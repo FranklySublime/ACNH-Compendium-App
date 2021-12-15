@@ -7,7 +7,7 @@ import styled from "styled-components";
 import Logo from "../../assets/Animal_Crossing_Leaf.svg";
 import { IconContext } from "react-icons";
 import { FiUser } from "react-icons/fi";
-
+import { Wrapper, LogoImg } from "./styled-components";
 const Header = () => {
 	return (
 		<Wrapper>
@@ -22,17 +22,5 @@ const Header = () => {
 		</Wrapper>
 	);
 };
-
-const Wrapper = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: 0px 35px;
-	background-color: var(--primary-color);
-`;
-
-const LogoImg = styled.img`
-	height: 50px;
-`;
 
 export default Header;

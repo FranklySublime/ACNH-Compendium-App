@@ -8,11 +8,16 @@ export const initialState = {
 	fossil: [],
 	art: [],
 	music: [],
+	fossils: [false, false, false, false],
+	moneyTree: false,
+	bottle: false,
+	rocks: [false, false, false, false, false, false],
 };
 
 export const reducer = (state, action) => {
 	console.log(action);
 	let category = action.collection;
+	let index = action.index;
 	switch (action.type) {
 		case "trigger-reload":
 			return {
@@ -40,6 +45,30 @@ export const reducer = (state, action) => {
 			state[category].splice(state[category].indexOf(action.data), 1);
 			return {
 				...state,
+			};
+		case "toggle-fossil":
+			let copiedFossils = [...state.fossils];
+			copiedFossils[index] = !copiedFossils[index];
+			return {
+				...state,
+				fossils: copiedFossils,
+			};
+		case "toggle-rock":
+			let copiedRocks = [...state.rocks];
+			copiedRocks[index] = !copiedRocks[index];
+			return {
+				...state,
+				rocks: copiedRocks,
+			};
+		case "toggle-money-tree":
+			return {
+				...state,
+				moneyTree: !state.moneyTree,
+			};
+		case "toggle-bottle":
+			return {
+				...state,
+				bottle: !state.bottle,
 			};
 		default:
 			throw new Error(

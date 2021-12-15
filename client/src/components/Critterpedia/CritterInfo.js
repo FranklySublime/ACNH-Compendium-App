@@ -9,7 +9,15 @@ import { UserContext } from "../../context/UserContext";
 import { capitalizeNames, rangeToMonth } from "../../helpers";
 
 // importing styling
-import { Wrapper } from "./styled-components";
+import {
+	Wrapper,
+	Title,
+	Image,
+	DetailsImageWrappper,
+	ImageWrapper,
+	InfoWrapper,
+	Bold,
+} from "./styled-components";
 
 const CritterInfo = () => {
 	const { category, id } = useParams();
@@ -32,40 +40,66 @@ const CritterInfo = () => {
 	return (
 		detailedCritter && (
 			<Wrapper>
-				<div>{capitalizeNames(detailedCritter.name["name-USen"])}</div>
-				<img
-					src={detailedCritter.image_uri}
-					alt={detailedCritter.name["name-USen"]}
-				/>
-				<h1>Critter Info</h1>
-				<div>Location: {detailedCritter.availability.location}</div>
-				<div>Price: {detailedCritter.price} bells</div>
-				<h2>Availability</h2>
-				<div>
-					Nothern Hemisphere:{" "}
-					{detailedCritter.availability.isAllYear
-						? "All Months"
-						: rangeToMonth(
-								detailedCritter.availability["month-northern"]
-						  )}
-				</div>
-				<div>
-					Southern Hemisphere:{" "}
-					{detailedCritter.availability.isAllYear
-						? "All Months"
-						: rangeToMonth(
-								detailedCritter.availability["month-southern"]
-						  )}
-				</div>
-				{state[category]?.includes(id) ? (
-					<button onClick={() => removeFromCollection(category, id)}>
-						Remove from Collection
-					</button>
-				) : (
-					<button onClick={() => addToCollection(category, id)}>
-						Add to Collection
-					</button>
-				)}
+				<DetailsImageWrappper>
+					<Title>
+						{capitalizeNames(detailedCritter.name["name-USen"])}
+					</Title>
+					<ImageWrapper>
+						<Image
+							src={detailedCritter.image_uri}
+							alt={detailedCritter.name["name-USen"]}
+						/>
+					</ImageWrapper>
+				</DetailsImageWrappper>
+				<InfoWrapper>
+					<Title>Critter Info</Title>
+					<div>
+						<Bold>Location:</Bold>
+						{detailedCritter.availability.location}
+					</div>
+					<div>
+						<Bold>Price:</Bold>
+						{detailedCritter.price} bells
+					</div>
+					<Title>Availability</Title>
+					<div>
+						<Bold>Nothern Hemisphere:</Bold>
+						{detailedCritter.availability.isAllYear
+							? "All Months"
+							: rangeToMonth(
+									detailedCritter.availability[
+										"month-northern"
+									]
+							  )}
+					</div>
+					<div>
+						<Bold>Southern Hemisphere:</Bold>
+						{detailedCritter.availability.isAllYear
+							? "All Months"
+							: rangeToMonth(
+									detailedCritter.availability[
+										"month-southern"
+									]
+							  )}
+					</div>
+					<div>
+						<Bold>Available Times:</Bold>
+						{detailedCritter.time
+							? detailedCritter.time
+							: "Available at all times of the day"}
+					</div>
+					{state[category]?.includes(id) ? (
+						<button
+							onClick={() => removeFromCollection(category, id)}
+						>
+							Remove from Collection
+						</button>
+					) : (
+						<button onClick={() => addToCollection(category, id)}>
+							Add to Collection
+						</button>
+					)}
+				</InfoWrapper>
 			</Wrapper>
 		)
 	);

@@ -8,6 +8,7 @@ export const Wrapper = styled.div`
 	border-radius: 20px;
 	padding: 15px;
 	background: var(--background-fade);
+	min-width: 720px;
 `;
 
 export const Title = styled.h1`

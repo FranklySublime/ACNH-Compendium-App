@@ -34,7 +34,7 @@ const Signin = () => {
 					console.log("JSON", json);
 					localStorage.setItem("_id", json.data);
 					triggerReload();
-					// navigate("../", { replace: true });
+					navigate("../", { replace: true });
 				} else {
 					setError(true);
 				}

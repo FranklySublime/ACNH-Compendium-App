@@ -86,6 +86,32 @@ export const UserProvider = ({ children }) => {
 		});
 	};
 
+	const toggleFossil = (index) => {
+		dispatch({
+			type: "toggle-fossil",
+			index,
+		});
+	};
+
+	const toggleRock = (index) => {
+		dispatch({
+			type: "toggle-rock",
+			index,
+		});
+	};
+
+	const toggleMoneyTree = () => {
+		dispatch({
+			type: "toggle-money-tree",
+		});
+	};
+
+	const toggleBottle = () => {
+		dispatch({
+			type: "toggle-bottle",
+		});
+	};
+
 	return (
 		<UserContext.Provider
 			value={{
@@ -95,6 +121,10 @@ export const UserProvider = ({ children }) => {
 					receiveUserFromServer,
 					addToCollection,
 					removeFromCollection,
+					toggleFossil,
+					toggleRock,
+					toggleMoneyTree,
+					toggleBottle,
 				},
 			}}
 		>

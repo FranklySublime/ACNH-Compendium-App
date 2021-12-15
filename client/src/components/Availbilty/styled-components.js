@@ -36,7 +36,8 @@ export const ImageWrapper = styled.div`
 
 export const CaughtWrapper = styled.div`
 	background-color: var(--accent-color);
-	border: 3px solid var(--primary-color);
+	/* border: 3px solid var(--primary-color); */
+	box-shadow: 0 0 2px 5px var(--primary-color) inset;
 	border-radius: 50%;
 	height: 120px;
 	width: 120px;

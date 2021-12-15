@@ -29,9 +29,9 @@ function App() {
 			<UserProvider>
 				<WikiProvider>
 					<GlobalStyles />
+					<Header />
+					<SubHeader />
 					<Wrapper>
-						<Header />
-						<SubHeader />
 						<Routes>
 							<Route path="/" element={<Homepage />} />
 							<Route
@@ -61,6 +61,10 @@ function App() {
 	);
 }
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+`;
 
 export default App;

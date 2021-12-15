@@ -29,7 +29,12 @@ export const ImageWrapper = styled.div`
 	border-radius: 50%;
 	width: 70px;
 	margin: 5px;
+	cursor: pointer;
+	transition: 200ms ease;
+	box-shadow: ${({ itemToggle }) =>
+		itemToggle ? "0 0 0px 5px #2EC4B6 inset" : ""};
 `;
+// box-shadow: 0 0 2px 5px var(--primary-color) inset;
 
 export const Image = styled.img`
 	height: 70px;

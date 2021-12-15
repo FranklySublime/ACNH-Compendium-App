@@ -9,7 +9,15 @@ import { UserContext } from "../../context/UserContext";
 import { capitalizeNames } from "../../helpers";
 
 // importing styling
-import { Wrapper } from "./styled-components";
+import {
+	Wrapper,
+	Title,
+	Image,
+	DetailsImageWrappper,
+	ImageWrapper,
+	InfoWrapper,
+	Bold,
+} from "./styled-components";
 
 const ArtifactInfo = () => {
 	const { category, id } = useParams();
@@ -33,39 +41,55 @@ const ArtifactInfo = () => {
 	return (
 		detailedArtifact && (
 			<Wrapper>
-				<div>{capitalizeNames(detailedArtifact.name["name-USen"])}</div>
-				<img
-					src={detailedArtifact.image_uri}
-					alt={detailedArtifact.name["name-USen"]}
-				/>
-				<h1>Artifact Info</h1>
-				{category === "art" ? (
-					<div>Has Fake: {detailedArtifact.hasFake.toString()}</div>
-				) : (
-					<div>Part of: {detailedArtifact["part-of"]}</div>
-				)}
-				<div>
-					Price:{" "}
-					{category === "art"
-						? detailedArtifact["sell-price"]
-						: detailedArtifact.price}{" "}
-					bells
-				</div>
-				<h2>Museum description</h2>
-				<div>
-					{category === "art"
-						? detailedArtifact["museum-desc"]
-						: detailedArtifact["museum-phrase"]}
-				</div>
-				{state[category]?.includes(id) ? (
-					<button onClick={() => removeFromCollection(category, id)}>
-						Remove from Collection
-					</button>
-				) : (
-					<button onClick={() => addToCollection(category, id)}>
-						Add to Collection
-					</button>
-				)}
+				<DetailsImageWrappper>
+					<Title>
+						{capitalizeNames(detailedArtifact.name["name-USen"])}
+					</Title>
+					<ImageWrapper>
+						<Image
+							src={detailedArtifact.image_uri}
+							alt={detailedArtifact.name["name-USen"]}
+						/>
+					</ImageWrapper>
+				</DetailsImageWrappper>
+				<InfoWrapper>
+					<Title>Artifact Info</Title>
+					{category === "art" ? (
+						<div>
+							<Bold>Has Fake:</Bold>
+							{detailedArtifact.hasFake.toString()}
+						</div>
+					) : (
+						<div>
+							<Bold>Part of:</Bold>
+							{detailedArtifact["part-of"]}
+						</div>
+					)}
+					<div>
+						<Bold>Price:</Bold>
+						{category === "art"
+							? detailedArtifact["sell-price"]
+							: detailedArtifact.price}{" "}
+						bells
+					</div>
+					<Title>Museum description</Title>
+					<div>
+						{category === "art"
+							? detailedArtifact["museum-desc"]
+							: detailedArtifact["museum-phrase"]}
+					</div>
+					{state[category]?.includes(id) ? (
+						<button
+							onClick={() => removeFromCollection(category, id)}
+						>
+							Remove from Collection
+						</button>
+					) : (
+						<button onClick={() => addToCollection(category, id)}>
+							Add to Collection
+						</button>
+					)}
+				</InfoWrapper>
 			</Wrapper>
 		)
 	);

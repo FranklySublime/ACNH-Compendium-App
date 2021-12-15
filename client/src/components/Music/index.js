@@ -22,6 +22,7 @@ const Music = () => {
 
 	return (
 		<WikiWrapper>
+			<Title>Now Playing on your Island:</Title>
 			<ItemList>
 				{musicList?.map((item) => {
 					return state.music?.includes(item["file-name"]) ? (

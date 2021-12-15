@@ -58,6 +58,18 @@ export default createGlobalStyle`
     blockquote, q {
         quotes: none;
     }
+
+    /* universal button */
+    button {
+        color: var(--just-white);
+        background: var(--primary-color);
+        border-radius: 20px;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+        margin: 15px;
+    }
+
     blockquote:before, blockquote:after,
     q:before, q:after {
         content: '';
