@@ -19,6 +19,14 @@ const SubHeader = () => {
 	const handleClick = (e) => {
 		navigate(`/${e}`);
 	};
+	let location = useLocation();
+
+	if (
+		location.pathname.includes("signup") ||
+		location.pathname.includes("signin")
+	) {
+		return null;
+	}
 
 	return (
 		<Wrapper>

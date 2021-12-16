@@ -23,7 +23,14 @@ const createAccount = async (req, res) => {
 
 		const db = client.db("users");
 
-		const { username, email, password, firstName, lastName } = req.body;
+		const {
+			username,
+			email,
+			password,
+			confirmPassword,
+			firstName,
+			lastName,
+		} = req.body;
 
 		let hash = bcrypt.hashSync(password, 10);
 
@@ -54,7 +61,8 @@ const createAccount = async (req, res) => {
 			return res.status(409).json({
 				status: 409,
 				data: req.body,
-				message: "this username has already been taken",
+				message:
+					"this email or username has already been registered with an account",
 			});
 		}
 
@@ -62,7 +70,16 @@ const createAccount = async (req, res) => {
 			return res.status(409).json({
 				status: 409,
 				data: req.body,
-				message: "this email is already registered with an account",
+				message:
+					"this email or username has already been registered with an account",
+			});
+		}
+
+		if (password !== confirmPassword) {
+			res.status(409).json({
+				status: 409,
+				data: req.body,
+				message: "the passwords entered do not match",
 			});
 		}
 

@@ -70,6 +70,9 @@ export const reducer = (state, action) => {
 				...state,
 				bottle: !state.bottle,
 			};
+		case "sign-out":
+			return initialState;
+
 		default:
 			throw new Error(
 				`STOP RIGHT THERE CRIMINAL SCUM! *unrecognized action: ${action.type}`

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { Wrapper, Input, FormWrapper } from "./styled-components";
 
@@ -11,6 +11,7 @@ const Signup = () => {
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
 	const [error, setError] = useState(false);
+	const [errorMessage, setErrorMessage] = useState("");
 
 	let navigate = useNavigate();
 
@@ -38,6 +39,7 @@ const Signup = () => {
 					navigate("../signin", { replace: true });
 				} else if (json.status === 409) {
 					setError(true);
+					setErrorMessage(json.message);
 				}
 			})
 			.catch((e) => {
@@ -85,12 +87,9 @@ const Signup = () => {
 					onChange={(e) => setLastName(e.target.value)}
 				/>
 				<button>Create Account</button>
-				{error && (
-					<div>
-						Looks like that username or email has already been
-						registered.
-					</div>
-				)}
+				<div>Already have an account?</div>
+				<Link to="/signin">Sign in</Link>
+				{error && <div>{errorMessage}</div>}
 			</FormWrapper>
 		</Wrapper>
 	);

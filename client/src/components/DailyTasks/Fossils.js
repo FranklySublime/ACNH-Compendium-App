@@ -15,7 +15,7 @@ const Fossils = () => {
 		<div>
 			<Title>Fossils, Money Tree, and DIY Recipe Bottle</Title>
 			<Box>
-				{state.fossils.map((item, index) => {
+				{state?.fossils.map((item, index) => {
 					return (
 						<ImageWrapper
 							onClick={() => toggleFossil(index)}

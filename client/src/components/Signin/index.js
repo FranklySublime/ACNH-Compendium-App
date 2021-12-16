@@ -62,9 +62,10 @@ const Signin = () => {
 					onChange={(e) => setPassword(e.target.value)}
 				/>
 				<button>Sign-In</button>
+				<div>Don't have an account?</div>
+				<Link to="/signup">Sign up</Link>
 			</FormWrapper>
-			<div>Don't have an account?</div>
-			<Link to="/signup">Sign up</Link>
+
 			{error && (
 				<div> Looks like the username or password is incorrect </div>
 			)}

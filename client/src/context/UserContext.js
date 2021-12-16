@@ -21,6 +21,11 @@ export const UserProvider = ({ children }) => {
 		});
 	};
 
+	const signOut = () => {
+		dispatch({
+			type: "sign-out",
+		});
+	};
 	// checks localStorage for user _id, if found, it fetches.
 	useEffect(() => {
 		let _id = localStorage.getItem("_id");
@@ -125,6 +130,7 @@ export const UserProvider = ({ children }) => {
 					toggleRock,
 					toggleMoneyTree,
 					toggleBottle,
+					signOut,
 				},
 			}}
 		>
