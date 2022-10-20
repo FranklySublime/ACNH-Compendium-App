@@ -34,7 +34,7 @@ const CollectionTracker = () => {
 				<Image src={BugIcon} />
 				<ProgressWrapper>
 					<ProgressBar
-						style={{ width: `${(bugProgress / 80) * 120}px` }}
+						style={{ width: `${(bugProgress / 80) * 300}px` }}
 					/>
 				</ProgressWrapper>
 				<div>{bugProgress} / 80</div>
@@ -43,7 +43,7 @@ const CollectionTracker = () => {
 				<Image src={FishIcon} />
 				<ProgressWrapper>
 					<ProgressBar
-						style={{ width: `${(fishProgress / 80) * 120}px` }}
+						style={{ width: `${(fishProgress / 80) * 300}px` }}
 					/>
 				</ProgressWrapper>
 				<div>{fishProgress} / 80</div>
@@ -52,7 +52,7 @@ const CollectionTracker = () => {
 				<Image src={SeaIcon} />
 				<ProgressWrapper>
 					<ProgressBar
-						style={{ width: `${(seaProgress / 40) * 120}px` }}
+						style={{ width: `${(seaProgress / 40) * 300}px` }}
 					/>
 				</ProgressWrapper>
 				<div>{seaProgress} / 40</div>
@@ -61,7 +61,7 @@ const CollectionTracker = () => {
 				<Image src={"https://acnhcdn.com/latest/MenuIcon/Fossil.png"} />
 				<ProgressWrapper>
 					<ProgressBar
-						style={{ width: `${(fossilProgress / 73) * 120}px` }}
+						style={{ width: `${(fossilProgress / 73) * 300}px` }}
 					/>
 				</ProgressWrapper>
 				<div>{fossilProgress} / 73</div>
@@ -70,7 +70,7 @@ const CollectionTracker = () => {
 				<Image src={ArtIcon} />
 				<ProgressWrapper>
 					<ProgressBar
-						style={{ width: `${(artProgress / 43) * 120}px` }}
+						style={{ width: `${(artProgress / 43) * 300}px` }}
 					/>
 				</ProgressWrapper>
 				<div>{artProgress} / 43</div>
@@ -79,7 +79,7 @@ const CollectionTracker = () => {
 				<Image src={MusicIcon} />
 				<ProgressWrapper>
 					<ProgressBar
-						style={{ width: `${(musicProgress / 95) * 120}px` }}
+						style={{ width: `${(musicProgress / 95) * 300}px` }}
 					/>
 				</ProgressWrapper>
 				<div>{musicProgress} / 95</div>
